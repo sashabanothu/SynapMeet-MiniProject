@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meeting {{ meeting.id }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+  <h1>Meeting {{ meeting.id }} - {{ meeting.filename }}</h1>
+
+  <h2>Transcript</h2>
+  <p>{{ meeting.transcript }}</p>
+
+  <h2>Action Items</h2>
+  <ul>
+    {% for item in meeting.action_items %}
+      <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Key Decisions</h2>
+  <ul>
+    {% for d in meeting.decisions %}
+      <li>{{ d }}</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{{ url_for('download', meeting_id=meeting.id) }}" class="button">Download Report</a>
+  <a href="{{ url_for('history') }}" class="button">Back to History</a>
+</div>
+</body>
+</html>

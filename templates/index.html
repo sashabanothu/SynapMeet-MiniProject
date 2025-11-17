@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎙️ SynapMeet - Meeting Insights</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="max-w-4xl mx-auto py-10">
+    
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-indigo-600">🎙️ SynapMeet</h1>
+      <p class="text-gray-600">AI-Powered Meeting Insights</p>
+    </div>
+
+    <!-- Upload Form -->
+    <form method="POST" enctype="multipart/form-data"
+          class="bg-white shadow-lg rounded-2xl p-6 mb-8">
+      <label class="block mb-2 font-semibold text-gray-700">Upload Meeting Audio</label>
+      <input type="file" name="file" class="mb-4 block w-full text-sm text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50">
+      <button type="submit" 
+              class="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700">
+        Upload & Process
+      </button>
+    </form>
+
+    <!-- Results -->
+    {% if transcript %}
+    <div class="grid gap-6">
+      
+      <!-- Transcript -->
+      <div class="bg-white shadow rounded-2xl p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-3">📝 Transcript</h2>
+        <div class="max-h-64 overflow-y-auto text-gray-700 leading-relaxed">
+          {{ transcript }}
+        </div>
+      </div>
+
+      <!-- Action Items -->
+      <div class="bg-white shadow rounded-2xl p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-3">✅ Action Items</h2>
+        <ul class="list-disc ml-5 text-gray-700 space-y-2">
+          {% for item in action_items %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Decisions -->
+      <div class="bg-white shadow rounded-2xl p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-3">📌 Decisions</h2>
+        <ul class="list-disc ml-5 text-gray-700 space-y-2">
+          {% for d in decisions %}
+          <li>{{ d }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
